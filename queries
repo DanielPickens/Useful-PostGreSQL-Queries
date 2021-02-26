@@ -98,3 +98,23 @@ $ pg_dump -U username -h hostname databasename > dump.sql
 #import data into a local host dbs
 
 $ psql -d newdb -f dump.sql
+
+
+## see all locks
+SELECT t.relname, l.locktype, page, virtualtransaction, pid, mode, granted 
+FROM pg_locks l, pg_stat_all_tables t 
+WHERE l.relation = t.relid ORDER BY relation asc;
+
+
+#get scehma ds sizes
+
+FROM (
+       SELECT
+         pg_catalog.pg_namespace.nspname                AS schema_name,
+         sum(pg_relation_size(pg_catalog.pg_class.oid)) AS schema_size
+       FROM pg_catalog.pg_class
+         JOIN pg_catalog.pg_namespace ON relnamespace = pg_catalog.pg_namespace.oid
+       group by 1
+     ) t
+WHERE schema_name NOT LIKE 'pg_%'
+ORDER BY schema_size DESC;
