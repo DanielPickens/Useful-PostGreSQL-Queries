@@ -23,3 +23,12 @@ LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace)
 WHERE nspname NOT IN ('pg_catalog', 'information_schema')
 ORDER BY pg_relation_size(C.oid) DESC
 LIMIT 20;
+
+
+# show all dbs and size
+
+select
+  datname as db,
+  pg_size_pretty(pg_database_size(datname)) as size
+from pg_database
+order by pg_database_size(datname) desc;
