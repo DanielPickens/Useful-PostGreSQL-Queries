@@ -82,3 +82,19 @@ SELECT
   CASE WHEN ipages < iotta THEN 0 ELSE bs*(ipages-iotta) END AS wastedibytes
 FROM sml
 ORDER BY wastedbytes DESC
+
+
+
+
+
+
+# dump data into a local host:
+
+$ pg_dump -U username -h hostname databasename > dump.sql
+
+
+
+
+#import data into a local host dbs
+
+$ psql -d newdb -f dump.sql
