@@ -1,3 +1,27 @@
+##Select where equal to
+
+postgres=# select * from dummy_table where age <=50;
+
+
+
+#Distinct values query
+
+postgres=# select distinct age from dummy_table order by 1;
+ age 
+-----
+   1
+   2
+   3
+
+
+#Find anomalies
+select datname, (xact_commit100)/nullif(xact_commit+xact_rollback,0) as c_commit_ratio, (xact_rollback100)/nullif(xact_commit+xact_rollback, 0) as c_rollback_ratio, deadlocks, conflicts, temp_files, pg_size_pretty(temp_bytes) from pg_stat_database;
+
+SELECT tbl_students.student_id, full_name
+FROM tbl_students
+INNER JOIN tbl_scores ON score.student_id = tbl_students.student_id;
+ORDER BY tbl_students.student_id;
+
 
 # get running queries
 SELECT
