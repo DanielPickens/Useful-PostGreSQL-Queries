@@ -1,3 +1,13 @@
+
+## elegant nartural joins:
+SELECT * FROM tbl_students NATURAL JOIN tbl_scores;
+
+
+
+
+
+
+
 ##Select where equal to
 
 postgres=# select * from dummy_table where age <=50;
